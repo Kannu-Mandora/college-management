@@ -1,10 +1,11 @@
 import "./globals.css";
-import Script from "next/script";
 import { Inter } from "next/font/google";
+import Navbar from "@/components/Navigation/Navbar";
+import { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "College Management System",
   description:
     "The College Management System is a web application that allows students to register for courses, and administrators to manage courses and students.",
@@ -17,8 +18,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
-      <Script src="https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js" crossOrigin="anonymous"></Script>
+      <body className={inter.className}>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }

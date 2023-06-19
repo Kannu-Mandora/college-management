@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import Link from "next/link";
 import Logo from "@components/Logo";
 import { Work_Sans } from "next/font/google";
@@ -11,15 +12,16 @@ import links from "@jsons/allLinks.json";
 import { useRef } from "react";
 export default function Navbar() {
   const headerRef = useRef<HTMLElement>(null);
-  const scroll = (): void => {
-    if (window.scrollY > 0) {
-      headerRef.current?.classList.add("bg-white", "shadow-md");
-    } else {
-      headerRef.current?.classList.remove("bg-white", "shadow-md");
-    }
-  };
-  window.addEventListener("scroll", scroll);
-
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 0) {
+        console.log("scrolled", headerRef.current?.classList);
+        headerRef.current?.classList.add("bg-white", "shadow-md");
+      } else {
+        headerRef.current?.classList.remove("bg-white", "shadow-md");
+      }
+    });
+  }, []);
   return (
     <>
       <header className={`${work_sans.className} sticky top-0`} ref={headerRef}>

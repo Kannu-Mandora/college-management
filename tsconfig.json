@@ -23,7 +23,7 @@
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
       "@styles/*": ["./src/assets/styles/*"],
-      "@types/*": ["./src/assets/types/*"],
+      "@customTypes*": ["./src/assets/customTypes/*"],
       "@store/*": ["./src/store/*"],
       "@jsons/*": ["./src/assets/jsons/*"],
       "@models/*": ["./src/libs/models/*"],

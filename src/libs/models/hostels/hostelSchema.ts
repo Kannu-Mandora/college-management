@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, models } from "mongoose";
 import IHostelModelType from "@customTypes/modelsSchemaTypes/HostelModelType";
 
 const hostelSchema = new Schema<IHostelModelType>({
@@ -70,4 +70,4 @@ const hostelSchema = new Schema<IHostelModelType>({
   },
 });
 
-export default model("Hostel", hostelSchema);
+export default models.Hostel || model("Student", hostelSchema);

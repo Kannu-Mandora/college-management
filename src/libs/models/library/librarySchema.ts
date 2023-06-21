@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, models } from "mongoose";
 import ILibraryModelType from "@customTypes/modelsSchemaTypes/LibraryModelType";
 
 const librarySchema = new Schema<ILibraryModelType>({
@@ -85,4 +85,4 @@ const librarySchema = new Schema<ILibraryModelType>({
   },
 });
 
-export default model("Library", librarySchema);
+export default models.Library || model("Student", librarySchema);

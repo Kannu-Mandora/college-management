@@ -1,4 +1,5 @@
-import { Schema, model } from "mongoose";
+import {Schema, models, model} from "mongoose";
+
 import IStudentsModelType from "@customTypes/modelsSchemaTypes/studentsModelType";
 
 const studentSchema = new Schema<IStudentsModelType>({
@@ -65,4 +66,4 @@ const studentSchema = new Schema<IStudentsModelType>({
   },
 });
 
-export default model("Student", studentSchema);
+export default models.Student || model("Student", studentSchema);

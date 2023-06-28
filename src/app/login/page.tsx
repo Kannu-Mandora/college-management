@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Login(): JSX.Element {
   return (
     <>
-        <section className="bg-white w-1/2 h-full mx-auto">
+        <section className="bg-white md:w-1/2 h-full mx-auto">
           <h1 className="text-center py-3 my-6 font-semibold text-2xl">
             Welcome Back
           </h1>

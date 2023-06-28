@@ -2,6 +2,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Navigation from "@components/Navigation/Navbar";
 import { Metadata } from "next";
+import ChakraProviderUI from "@/components/ChakraProviderUI";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navigation />
-        {children}
+        <ChakraProviderUI>{children}</ChakraProviderUI>
       </body>
     </html>
   );

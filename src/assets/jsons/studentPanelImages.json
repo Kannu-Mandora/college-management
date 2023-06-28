@@ -1,0 +1,38 @@
+[
+  {
+    "_id": 1,
+    "link": "result",
+    "imagePath": "/result.png",
+    "text": "Check Result"
+  },
+  {
+    "_id": 2,
+    "link": "timeTable",
+    "imagePath": "/timeTable.png",
+    "text": "Time Table"
+  },
+  {
+    "_id": 3,
+    "link": "syllabus",
+    "imagePath": "/Syllabusbook.png",
+    "text": "Syllabus"
+  },
+  {
+    "_id": 4,
+    "link": "complain",
+    "imagePath": "/complain.png",
+    "text": "Complain"
+  },
+  {
+    "_id": 5,
+    "link": "portal",
+    "imagePath": "/fees.png",
+    "text": "Fee Portal"
+  },
+  {
+    "_id": 6,
+    "link": "editDetails",
+    "imagePath": "/business-card.png",
+    "text": "Edit Details"
+  }
+]

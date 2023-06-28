@@ -8,14 +8,10 @@ import {
   useDisclosure,
   Button,
 } from "@chakra-ui/react";
-import Image from "next/image";
 import StudentPanel from "./StudentPanel";
+import { FcSettings } from "react-icons/fc";
 
-function DrawerExample({
-  userImageLink,
-}: {
-  userImageLink: string | undefined;
-}) {
+function StudentDrawerPanel() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef(null);
 
@@ -27,13 +23,7 @@ function DrawerExample({
         _hover={{ backgroundColor: "transparent" }}
         onClick={onOpen}
       >
-        <Image
-          src={userImageLink ?? "/images/logo.png"}
-          width={50}
-          height={50}
-          alt=""
-          className="rounded-full bg-white p-2 border-2 border-[--main]"
-        />
+        <FcSettings className="text-4xl p-1" />
       </Button>
       <Drawer
         isOpen={isOpen}
@@ -50,4 +40,4 @@ function DrawerExample({
     </>
   );
 }
-export default DrawerExample;
+export default StudentDrawerPanel;

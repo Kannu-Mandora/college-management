@@ -1,4 +1,3 @@
-import { AiFillHome } from "react-icons/ai";
 import Card from "./Card";
 import DrawerUI from "@/components/WelcomePageComponents/studentsComponents/StudentDrawerPanel";
 export default function StudentPage({
@@ -18,9 +17,7 @@ export default function StudentPage({
           </span>
         </span>
         <div className="flex items-center gap-3">
-          Dashboard{" "}
-          <AiFillHome className="text-white bg-blue-400 text-4xl p-2 rounded" />{" "}
-          <DrawerUI userImageLink={userImageLink} />
+          Dashboard <DrawerUI />
         </div>
       </div>
       <Card />

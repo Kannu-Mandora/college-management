@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import {
   Drawer,
   DrawerOverlay,
@@ -9,11 +9,21 @@ import {
   Button,
 } from "@chakra-ui/react";
 import StudentPanel from "./StudentPanel";
-import { FcSettings } from "react-icons/fc";
+import Image from "next/image";
+import { getSession } from "next-auth/react";
+import { Session } from "next-auth";
 
-function StudentDrawerPanel() {
+function StudentDrawerPanel(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef(null);
+  const [session, setSession] = useState<Session | null>();
+  const getSessionData = async () => {
+    const session = await getSession();
+    setSession(session);
+  };
+  useLayoutEffect(() => {
+    getSessionData();
+  }, [session]);
 
   return (
     <>
@@ -23,7 +33,13 @@ function StudentDrawerPanel() {
         _hover={{ backgroundColor: "transparent" }}
         onClick={onOpen}
       >
-        <FcSettings className="text-4xl p-1" />
+        <Image
+          src={session?.user?.image!}
+          width={40}
+          height={40}
+          alt="Profile Image"
+          className="p-1 rounded-full"
+        />
       </Button>
       <Drawer
         isOpen={isOpen}

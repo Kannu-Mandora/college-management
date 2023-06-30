@@ -4,7 +4,7 @@ const nextConfig = {
       serverComponentsExternalPackages: ["mongoose"],
     },
     images: {
-      domains: ['ik.imagekit.io'],
+      domains: ['ik.imagekit.io', "lh3.googleusercontent.com"],
     },
     webpack(config) {
       config.experiments = { ...config.experiments, topLevelAwait: true };

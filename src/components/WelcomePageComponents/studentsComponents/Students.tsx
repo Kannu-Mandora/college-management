@@ -1,12 +1,6 @@
 import Card from "./Card";
 import DrawerUI from "@/components/WelcomePageComponents/studentsComponents/StudentDrawerPanel";
-export default function StudentPage({
-  studentName,
-  userImageLink,
-}: {
-  studentName: string;
-  userImageLink?: string;
-}) {
+export default function StudentPage({ studentName }: { studentName: string }) {
   return (
     <>
       <div className="flex justify-between gap-2 items-center bg-gray-100 px-5 py-1 sticky top-16">

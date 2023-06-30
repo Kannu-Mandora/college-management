@@ -3,8 +3,29 @@ import { FcGoogle } from "react-icons/fc";
 import { BsGithub } from "react-icons/bs";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
+import { FormEvent, useRef } from "react";
 
 export default function Login(): JSX.Element {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const rememberRef = useRef<HTMLInputElement>(null);
+
+  const onCredentialsSubmit = async (
+    event: FormEvent<HTMLFormElement>
+  ): Promise<void> => {
+    event.preventDefault();
+    const email = emailRef.current?.value;
+    const password = passwordRef.current?.value;
+
+    if (email && password) {
+      await signIn("credentials", {
+        email,
+        password,
+        callbackUrl: "/welcome",
+      });
+    }
+  };
+
   return (
     <>
       <section className="bg-white md:w-1/2 h-full mx-auto">
@@ -12,24 +33,28 @@ export default function Login(): JSX.Element {
           Welcome Back
         </h1>
         <div
-          className="flex max-sm:flex-col items-center justify-center gap-2"
+          className="flex flex-col items-center justify-center gap-2"
           id="socialMediaButton"
         >
           <button
             onClick={() => signIn("google", { callbackUrl: "/welcome" })}
-            className="flex items-center border border-gray-200 rounded-md max-sm:w-4/5 max-sm:px-10 px-20 py-2 gap-2"
+            className="flex justify-center items-center border border-gray-200 rounded-md w-10/12 py-2 gap-2"
           >
             <FcGoogle /> Sign in with Google
           </button>
           <button
             onClick={() => signIn("github", { callbackUrl: "/welcome" })}
-            className="flex items-center border border-gray-200 rounded-md max-sm:w-4/5 max-sm:px-10 px-20 py-2 gap-2"
+            className="flex justify-center items-center border border-gray-200 rounded-md w-10/12 py-2 gap-2"
           >
             <BsGithub /> Sign in with GitHub
           </button>
         </div>
         <h1 className="text-center my-4">OR</h1>
-        <form method="post" className="w-5/6 mx-auto">
+        <form
+          onSubmit={onCredentialsSubmit}
+          method="post"
+          className="w-5/6 mx-auto"
+        >
           <div className="flex flex-col gap-2 my-4">
             <label htmlFor="email">Email</label>
             <input
@@ -38,6 +63,7 @@ export default function Login(): JSX.Element {
               id="email"
               placeholder="Email"
               className="border border-gray-300 bg-gray-100  p-2 rounded-md"
+              ref={emailRef}
             />
           </div>
           <div className="flex flex-col gap-2 my-4">
@@ -48,6 +74,7 @@ export default function Login(): JSX.Element {
               id="password"
               placeholder="Password"
               className="border border-gray-300 bg-gray-100  p-2 rounded-md"
+              ref={passwordRef}
             />
           </div>
           <div className="flex items-center justify-between gap-2 my-4">
@@ -57,6 +84,7 @@ export default function Login(): JSX.Element {
                 name="rememberMe"
                 id="rememberMe"
                 className="mx-2"
+                ref={rememberRef}
               />
               <label htmlFor="rememberMe" className="text-sm">
                 Remember Me

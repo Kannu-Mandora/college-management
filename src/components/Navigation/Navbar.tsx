@@ -1,16 +1,29 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import Link from "next/link";
 import Logo from "@components/Logo";
 import { Work_Sans } from "next/font/google";
 import Hambar from "./Hambar";
+import { getSession, signOut } from "next-auth/react";
 const work_sans = Work_Sans({
   subsets: ["latin", "latin-ext"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 import links from "@jsons/allLinks.json";
 import { useRef } from "react";
+import { Session } from "next-auth";
+
 export default function Navbar() {
+  // Get Session of User for Navbar Login Button
+  const [session, setSession] = useState<Session | null>();
+  const getSessionData = async () => {
+    const session = await getSession();
+    setSession(session);
+  };
+  useLayoutEffect(() => {
+    getSessionData();
+  }, []);
+
   const headerRef = useRef<HTMLElement>(null);
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -42,12 +55,21 @@ export default function Navbar() {
                 </Link>
               </li>
             ))}
-            <Link
-              href="/login"
-              className="bg-[--main] px-3 py-1 rounded hover:bg-[--secondary] hover:text-white transition-colors delay-100"
-            >
-              Login
-            </Link>
+            {session ? (
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className="bg-[--main] px-3 py-1 rounded hover:bg-[--secondary] hover:text-white transition-colors delay-100"
+              >
+                Log out
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                className="bg-[--main] px-3 py-1 rounded hover:bg-[--secondary] hover:text-white transition-colors delay-100"
+              >
+                Login
+              </Link>
+            )}
           </ul>
         </nav>
       </header>

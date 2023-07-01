@@ -5,6 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Image from "next/image";
 import { Session } from "next-auth";
 import { getSession, signOut } from "next-auth/react";
+import Link from "next/link";
 
 export default function BasicMenu() {
   const [session, setSession] = useState<Session | null>();
@@ -50,7 +51,9 @@ export default function BasicMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>Manage Account</MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Link href="/profile">Manage Account</Link>{" "}
+        </MenuItem>
         <MenuItem
           onClick={() => {
             handleClose();

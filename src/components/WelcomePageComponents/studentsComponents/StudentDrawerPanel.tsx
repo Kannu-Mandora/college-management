@@ -23,7 +23,7 @@ function StudentDrawerPanel(): JSX.Element {
   };
   useLayoutEffect(() => {
     getSessionData();
-  }, [session]);
+  }, []);
 
   return (
     <>

@@ -1,17 +1,16 @@
 "use client";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import Link from "next/link";
 import Logo from "@components/Logo";
 import { Work_Sans } from "next/font/google";
 import Hambar from "./Hambar";
 import AvatarButton from "./AvatarButton";
-import { getSession, signOut } from "next-auth/react";
+import { getSession } from "next-auth/react";
 const work_sans = Work_Sans({
   subsets: ["latin", "latin-ext"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 import links from "@jsons/allLinks.json";
-import { useRef } from "react";
 import { Session } from "next-auth";
 
 export default function Navbar() {
@@ -25,20 +24,11 @@ export default function Navbar() {
     getSessionData();
   }, []);
 
-  const headerRef = useRef<HTMLElement>(null);
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 0) {
-        console.log("scrolled", headerRef.current?.classList);
-        headerRef.current?.classList.add("bg-white", "shadow-md");
-      } else {
-        headerRef.current?.classList.remove("bg-white", "shadow-md");
-      }
-    });
-  }, []);
   return (
     <>
-      <header className={`${work_sans.className} sticky top-0`} ref={headerRef}>
+      <header
+        className={`${work_sans.className} sticky top-0 bg-white shadow-md`}
+      >
         <nav className="flex justify-between items-center px-6 py-2">
           <div className="flex items-center gap-3">
             <Logo />

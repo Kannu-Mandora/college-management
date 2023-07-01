@@ -46,6 +46,14 @@ export default function Navbar() {
                 </Link>
               </li>
             ))}
+            {!session ? null : (
+              <Link
+                href="/dashboard"
+                className="text-gray-500 hover:text-gray-900"
+              >
+                Dashboard
+              </Link>
+            )}
             {session ? (
               <AvatarButton />
             ) : (

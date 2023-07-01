@@ -33,6 +33,7 @@ export default function BasicMenu() {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
+        style={{border: "2px solid var(--secondary)", borderRadius: "100%", padding: "0.2rem", minWidth: "0"}}
       >
         <Image
           src={session?.user?.image!}
@@ -52,7 +53,7 @@ export default function BasicMenu() {
         }}
       >
         <MenuItem onClick={handleClose}>
-          <Link href="/profile">Manage Account</Link>{" "}
+          <Link href="/profile">Manage Account</Link>
         </MenuItem>
         <MenuItem
           onClick={() => {

@@ -21,7 +21,7 @@ export default function Login(): JSX.Element {
       await signIn("credentials", {
         email,
         password,
-        callbackUrl: "/welcome",
+        callbackUrl: "/dashboard",
       });
     }
   };
@@ -37,13 +37,13 @@ export default function Login(): JSX.Element {
           id="socialMediaButton"
         >
           <button
-            onClick={() => signIn("google", { callbackUrl: "/welcome" })}
+            onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
             className="flex justify-center items-center border border-gray-200 rounded-md w-10/12 py-2 gap-2"
           >
             <FcGoogle /> Sign in with Google
           </button>
           <button
-            onClick={() => signIn("github", { callbackUrl: "/welcome" })}
+            onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
             className="flex justify-center items-center border border-gray-200 rounded-md w-10/12 py-2 gap-2"
           >
             <BsGithub /> Sign in with GitHub

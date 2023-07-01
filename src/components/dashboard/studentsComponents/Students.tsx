@@ -1,5 +1,5 @@
 import Card from "./Card";
-import DrawerUI from "@/components/WelcomePageComponents/studentsComponents/StudentDrawerPanel";
+import DrawerUI from "@components/dashboard/studentsComponents/StudentDrawerPanel";
 export default function StudentPage({ studentName }: { studentName: string }) {
   return (
     <>

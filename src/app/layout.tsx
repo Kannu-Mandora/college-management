@@ -4,6 +4,7 @@ import Navigation from "@components/Navigation/Navbar";
 import { Metadata } from "next";
 import ChakraProviderUI from "@/components/ChakraProviderUI";
 import NextAuthSessionProvider from "@components/SessionProvider";
+import Footer from "@components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
         <NextAuthSessionProvider>
           <Navigation />
           <ChakraProviderUI>{children}</ChakraProviderUI>
+          <Footer />
         </NextAuthSessionProvider>
       </body>
     </html>

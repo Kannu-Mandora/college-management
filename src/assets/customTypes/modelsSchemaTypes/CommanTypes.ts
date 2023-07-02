@@ -9,6 +9,7 @@ interface CommanTypes {
   contactNumber: Number;
   email: string;
   profileImage: string;
+  password: string;
 }
 
 export default CommanTypes;

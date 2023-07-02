@@ -1,10 +1,11 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+import NextAuth, { NextAuthOptions, User } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import CredentialProvider from "next-auth/providers/credentials";
 import studentSchema from "@models/students/studentSchema";
 import studentModelType from "@customTypes/modelsSchemaTypes/studentsModelType";
 import { connectDatabase } from "@database/connection";
+import { compareSync } from "bcryptjs";
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.AUTH_SECRET,
@@ -30,34 +31,38 @@ export const authOptions: NextAuthOptions = {
 
       async authorize(credentials): Promise<any> {
         if (!credentials) return null;
-        const { email } = credentials;
+        const { email, password } = credentials as {
+          email: string;
+          password: string;
+        };
         await connectDatabase();
-        const user = await studentSchema.find({ email });
-        if (!user) return null;
+        const user = await studentSchema.findOne({ email });
+        if (!user) return false;
         else {
-          const { email, studentName, profileImage } =
-            user[0] as studentModelType;
-          return { email, name: studentName, image: profileImage };
+          const isMatched = compareSync(password, user?.password);
+          if (!isMatched) return false;
+          else {
+            const { email, studentName, profileImage } = user;
+            return { email, name: studentName, image: profileImage };
+          }
         }
       },
     }),
   ],
   callbacks: {
-    async signIn({ user, account, profile }): Promise<boolean> {
+    async signIn({ user }: { user: User }): Promise<boolean> {
       await connectDatabase();
-      const existingUser = await studentSchema.find<studentModelType>({
+      const existingUser = await studentSchema.findOne<studentModelType>({
         email: user?.email,
       });
-      if (existingUser.length === 0) return false;
-      else return true;
-    },
-    redirect({ url, baseUrl }) {
-      return Promise.resolve(url); // This is will redirect to the url provided. If user signed in successfully, then it will redirect to /dashboard. If user signout then, it will redirect to "/"
+      if (!existingUser) return false;
+      return true;
     },
   },
   jwt: { maxAge: 60 * 60 * 24 * 30 },
   pages: {
     error: "/login", // Error code passed in query string as ?error=
+    signIn: "/login",
   },
 };
 

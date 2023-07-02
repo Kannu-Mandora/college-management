@@ -4,6 +4,7 @@ import { BsGithub } from "react-icons/bs";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { FormEvent, useRef } from "react";
+import NoAccessAccount from "@components/NoAccount";
 
 export default function Login(): JSX.Element {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -28,6 +29,7 @@ export default function Login(): JSX.Element {
 
   return (
     <>
+      <NoAccessAccount />
       <section className="bg-white md:w-1/2 h-full mx-auto">
         <h1 className="text-center py-3 my-6 font-semibold text-2xl">
           Welcome Back

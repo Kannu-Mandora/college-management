@@ -42,7 +42,23 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  callbacks: {
+    async signIn({ user, account, profile }): Promise<boolean> {
+      await connectDatabase();
+      const existingUser = await studentSchema.find<studentModelType>({
+        email: user?.email,
+      });
+      if (existingUser.length === 0) return false;
+      else return true;
+    },
+    redirect({ url, baseUrl }) {
+      return Promise.resolve(url); // This is will redirect to the url provided. If user signed in successfully, then it will redirect to /dashboard. If user signout then, it will redirect to "/"
+    },
+  },
   jwt: { maxAge: 60 * 60 * 24 * 30 },
+  pages: {
+    error: "/login", // Error code passed in query string as ?error=
+  },
 };
 
 const handler = NextAuth(authOptions);
